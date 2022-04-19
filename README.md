@@ -11,9 +11,9 @@ https://github.com/vindex10/cicliminds-lib
 
 * Make sure you have `python3.9` and `pipenv` installed
 - `Proj` version >= 8.0.0 needs to be installed since it is required for
-  `cartopy`. Check (webpage)[https://proj.org/install.html] for installation
+  `cartopy`. Check [webpage](https://proj.org/install.html) for installation
   guidelines.
-- Install (cicliminds-lib)[https://github.com/vindex10/cicliminds-lib]
+- Install [cicliminds-lib](https://github.com/vindex10/cicliminds-lib)
   repository.
 
 ```bash
