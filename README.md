@@ -1,17 +1,35 @@
+This repo is a fork of https://github.com/vindex10/cicliminds
+
 # Visualization of ETCCDI climate indices
+
+This repository is supposed to be a user interface, while all the logic and data
+processing is handled by Libs:
+
+https://github.com/vindex10/cicliminds-lib
 
 ## Installation
 
-* Clone repo
-* Make sure you have pipenv installed
+* Make sure you have `python3.9` and `pipenv` installed
+- `Proj` version >= 8.0.0 needs to be installed since it is required for
+  `cartopy`. Check (webpage)[https://proj.org/install.html] for installation
+  guidelines.
+- Install (cicliminds-lib)[https://github.com/vindex10/cicliminds-lib]
+  repository.
 
 ```bash
-git clone https://github.com/vindex10/cicliminds
+pip install git+https://github.com/vindex10/cicliminds-lib#egg=cicliminds-lib
+```
+
+* Clone repo and install.
+
+```bash
+git clone https://github.com/profesorpaiche/cicliminds
 cd cicliminds
 pipenv sync
 ```
 
-Provide path to the data, and make sure `cicliminds` package is accessible from the notebook. For example like this:
+Provide path to the data, and make sure `cicliminds` package is accessible from
+the notebook. For example like this:
 
 ```
 DATA_DIR="path/to/data" PYTHONPATH="`pwd`" jupyter lab .
@@ -23,11 +41,12 @@ To make model weights available, provide path to model weight files:
 DATA_DIR="path/to/data" MODEL_WEIGHTS_DIR="path/to/model_weights/" PYTHONPATH="`pwd`" jupyter lab .
 ```
 
+NOTE: Some systems use `jupyter-lab` instead of `jupyter lab`.
+
+Once Jupyter is launched in the browser, select the `app.ipynb` on the left panel
+and run all the notebook to start the app.
+
 Read more on preparing and using model weights below.
-
-This repository is supposed to be a user interface, while all the logic and data processing is handled by Libs:
-
-https://github.com/vindex10/cicliminds-lib
 
 ## Usage
 
