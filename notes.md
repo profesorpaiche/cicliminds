@@ -21,8 +21,8 @@ Here are some notes related to the project `cicliminds`.
     - [X] After launching `jupyter lab`, there is no instructions on how to
       proceed or how to launch the interface.
 
-- [O] It should be explicit that this project is only the UI of the "program", and
-  all the "brain" is done in another package which needs to be install. So,
+- [O] It should be explicit that this project is only the UI of the "program",
+  and all the "brain" is done in another package which needs to be install. So,
   clearer installation steps for the `cicliminds` is needed.
     - [.] Included as description, needs improvement.
 
@@ -37,12 +37,12 @@ Here are some notes related to the project `cicliminds`.
     - [o] Error with `xmca` packages because of the incorrect `cartopy` library
       (seems like be a problem only in my system).
 
-- [o] FIXME: Error in `cicliminds-lib` library. Tries to download a zip file from
+- [O] FIXME: Error in `cicliminds-lib` library. Tries to download a zip file from
   a link that is not correct (maybe it was change since the time the library was
   created)
-    - [X] Identify the correct link
-      (https://github.com/mathause/regionmask/tree/main/data)
-    - [ ] Modify `cicliminds-lib` to fix the error.
+    - [X] Install the last version `regionmask`.
+    - [o] `cicliminds-libs` requires and old version of `regionmask` (0.6).
+      Update the `setup.cfg`.
 
 # Changelog
 
