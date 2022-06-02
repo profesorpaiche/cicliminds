@@ -5,19 +5,19 @@ This repo is a fork of https://github.com/vindex10/cicliminds
 This repository is supposed to be a user interface, while all the logic and data
 processing is handled by Libs:
 
-https://github.com/vindex10/cicliminds-lib
+https://github.com/profesorpaiche/cicliminds-lib
 
 ## Installation
 
-* Make sure you have `python3.9` and `pipenv` installed
+- Make sure you have `python3.9`, `pipenv` and `jupyterlab` installed.
 - `Proj` version >= 8.0.0 needs to be installed since it is required for
   `cartopy`. Check [webpage](https://proj.org/install.html) for installation
   guidelines.
-- Install [cicliminds-lib](https://github.com/vindex10/cicliminds-lib)
-  repository.
+- Install [cicliminds-lib](https://github.com/profesorpaiche/cicliminds-lib)
+  repository. Please, check its requirements.
 
 ```bash
-pip install git+https://github.com/vindex10/cicliminds-lib#egg=cicliminds-lib
+pip install 'git+https://github.com/profesorpaiche/cicliminds-lib#egg=cicliminds-lib'
 ```
 
 * Clone repo and install.
