@@ -11,10 +11,11 @@ The task is divided in 5 major steps:
 Considering a 10 hours/week job and the 6 major tasks, here is a weekly schedule
 to achieve the objective:
 
-1. [T1] [ ] Install the program and identify errors, problems, and points to
+1. [T1] [o] Install the program and identify errors, problems, and points to
    improve.
-    - [o] Installation.
-    - [o] Notes.
+    - [x] Installation.
+    - [o] Run the app -> Need sample data.
+    - [O] Notes.
 2. [T2] Review the UI section and get familiar with its workflow.
 3. [T2] Review the `cicliminds` package - Review code.
 4. [T2] Review the `cicliminds` package - Review functionality.

@@ -30,21 +30,29 @@ Here are some notes related to the project `cicliminds`.
   will include `DATA_DIR`, `MODEL_WEIGHTS_DIR`, and the creation of the
   respective directories.
 
-- [ ] Is `DATA_DIR` and `MODEL_WEIGHTS_DIR` related with the data used in the
+- [.] Is `DATA_DIR` and `MODEL_WEIGHTS_DIR` related with the data used in the
   program? If so, is this the place where the program needs to connect to CDS?
+    - [O] Q1 -> maybe yes, Q2 -> maybe yes.
+    - [ ] FIXME: Need sample data to continue with the app.
 
-- [O] Install `cicliminds-lib`.
-    - [o] Error with `xmca` packages because of the incorrect `cartopy` library
-      (seems like be a problem only in my system).
+- [X] Install `cicliminds-lib`.
+    - [X] Error with `xmca` packages because of the incorrect `cartopy` library
+      (seems like be a problem only in my system -> it was a problem of my system).
 
-- [O] FIXME: Error in `cicliminds-lib` library. Tries to download a zip file from
+- [X] FIXME: Error in `cicliminds-lib` library. Tries to download a zip file from
   a link that is not correct (maybe it was change since the time the library was
   created)
     - [X] Install the last version `regionmask`.
-    - [o] `cicliminds-libs` requires and old version of `regionmask` (0.6).
+    - [X] `cicliminds-libs` calls an old version of `regionmask` (0.6).
       Update the `setup.cfg`.
+
+-  Some caveats with the intallation:
+    - Don't use python3.10 because its `pipenv` package doesn't work properly.
+    - Be sure to have the python headers in order to install packages like `cartopy`.
 
 # Changelog
 
 - 2022-04-19:
     - Improving the installation part in `README.md`.
+- 2022-05-26:
+    - Updating the libraries required in `cicliminds-lib`.
