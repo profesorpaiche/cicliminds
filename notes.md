@@ -14,7 +14,6 @@ Here are some notes related to the project `cicliminds`.
       package, there are also no instructions of how to install the packages. For
       a non-python user, this is a problem (like me).
         - [X] Link to the repo and instructions for installation.
-    - [ ] There is no explanation about the data used in the project, where to
       get it, or how it is related to `DATA_DIR` and `MODEL_WEIGHTS_DIR`.
     - [X] `jupyter lab` does not work in my system, instead `jupyter-lab` can be
       used.
@@ -30,14 +29,19 @@ Here are some notes related to the project `cicliminds`.
   will include `DATA_DIR`, `MODEL_WEIGHTS_DIR`, and the creation of the
   respective directories.
 
-- [.] Is `DATA_DIR` and `MODEL_WEIGHTS_DIR` related with the data used in the
+- [O] Is `DATA_DIR` and `MODEL_WEIGHTS_DIR` related with the data used in the
   program? If so, is this the place where the program needs to connect to CDS?
-    - [O] Q1 -> maybe yes, Q2 -> maybe yes.
-    - [ ] FIXME: Need sample data to continue with the app.
+    - [X] Q1 -> maybe yes, Q2 -> maybe yes.
+    - [O] Data must be downloaded from the CDS and place it `DATA_DIR`.
+    - [o] I don't know where `weights` data comes from (for sure not from
+      `DATA_DIR` files).
+        - [O] FIXME: For the moment a dummy file was created inside
+          `MODEL_WEIGHTS_DIR`.
 
 - [X] Install `cicliminds-lib`.
     - [X] Error with `xmca` packages because of the incorrect `cartopy` library
-      (seems like be a problem only in my system -> it was a problem of my system).
+      (seems like be a problem only in my system -> it was a problem of my
+      system).
 
 - [X] FIXME: Error in `cicliminds-lib` library. Tries to download a zip file from
   a link that is not correct (maybe it was change since the time the library was
@@ -46,9 +50,12 @@ Here are some notes related to the project `cicliminds`.
     - [X] `cicliminds-libs` calls an old version of `regionmask` (0.6).
       Update the `setup.cfg`.
 
--  Some caveats with the intallation:
-    - Don't use python3.10 because its `pipenv` package doesn't work properly.
-    - Be sure to have the python headers in order to install packages like `cartopy`.
+Some caveats with the intallation:
+
+- Don't use python3.10 because its `pipenv` package doesn't work properly.
+- Be sure to have the python headers in order to install packages like
+  `cartopy`.
+- Download data from the CDS.
 
 # Changelog
 
@@ -56,3 +63,6 @@ Here are some notes related to the project `cicliminds`.
     - Improving the installation part in `README.md`.
 - 2022-05-26:
     - Updating the libraries required in `cicliminds-lib`.
+- 2022-06-05:
+    - FIXED: Name convention not recognized by the app.
+    - FIXME: Dummy weights file created.
