@@ -25,13 +25,14 @@ Here are some notes related to the project `cicliminds`.
   clearer installation steps for the `cicliminds` is needed.
     - [.] Included as description, needs improvement.
 
-- [ ] Consider create a `setup` script to deal with the console variables. It
+- [O] Consider create a `setup` script to deal with the console variables. It
   will include `DATA_DIR`, `MODEL_WEIGHTS_DIR`, and the creation of the
   respective directories.
+    - [ ] Still needs the creation of directories.
 
 - [O] Is `DATA_DIR` and `MODEL_WEIGHTS_DIR` related with the data used in the
   program? If so, is this the place where the program needs to connect to CDS?
-    - [X] Q1 -> maybe yes, Q2 -> maybe yes.
+    - [X] Q1 -> yes, Q2 -> yes.
     - [O] Data must be downloaded from the CDS and place it `DATA_DIR`.
     - [o] I don't know where `weights` data comes from (for sure not from
       `DATA_DIR` files).
@@ -49,6 +50,7 @@ Here are some notes related to the project `cicliminds`.
     - [X] Install the last version `regionmask`.
     - [X] `cicliminds-libs` calls an old version of `regionmask` (0.6).
       Update the `setup.cfg`.
+    - [X] Update deprecated functions from `regionmask`.
 
 Some caveats with the intallation:
 
@@ -66,3 +68,6 @@ Some caveats with the intallation:
 - 2022-06-05:
     - FIXED: Name convention not recognized by the app.
     - FIXME: Dummy weights file created.
+- 2022-06-06:
+    - FIXED: Updated deprecated functions from `regionmask`.
+    - The app works (seems like...)
