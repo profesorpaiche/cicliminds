@@ -38,6 +38,7 @@ Here are some notes related to the project `cicliminds`.
       `DATA_DIR` files).
         - [O] FIXME: For the moment a dummy file was created inside
           `MODEL_WEIGHTS_DIR`.
+        - [ ] Ask for information.
 
 - [X] Install `cicliminds-lib`.
     - [X] Error with `xmca` packages because of the incorrect `cartopy` library
@@ -51,6 +52,11 @@ Here are some notes related to the project `cicliminds`.
     - [X] `cicliminds-libs` calls an old version of `regionmask` (0.6).
       Update the `setup.cfg`.
     - [X] Update deprecated functions from `regionmask`.
+
+- [ ] Create the list of variables (For the moment the only idea is hard coding
+  it, which is not ideal).
+
+- [ ] Chech the CDS toolbox.
 
 Some caveats with the intallation:
 
