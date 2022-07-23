@@ -16,11 +16,11 @@ to achieve the objective:
     - [X] Installation.
     - [O] Run the app -> Need sample data and weights.
     - [O] Notes.
-2. [T2] Review the UI section and get familiar with its workflow.
-3. [T2] Review the `cicliminds` package - Review code.
-4. [T2] Review the `cicliminds` package - Review functionality.
-5. [T2] Review the `cicliminds` package - Review data management.
-6. [T3] Identify the section that needs to be change and its dependencies.
+2. [T2] [O] Review the UI section and get familiar with its workflow.
+3. [T2] [o] Review the `cicliminds` package - Review code.
+4. [T2] [o] Review the `cicliminds` package - Review functionality.
+5. [T2] [.] Review the `cicliminds` package - Review data management.
+6. [T3] [.] Identify the section that needs to be change and its dependencies.
 7. [T3] Get familiar with the section that downloads data.
 8. [T3] Look for documentation on how to access the requested data.
 9. [T3] Design a procedure to access the data.

@@ -58,6 +58,9 @@ Here are some notes related to the project `cicliminds`.
 
 - [ ] Chech the CDS toolbox.
 
+- [ ] The app should be able to download data from the CDS or to import it from
+  the user.
+
 Some caveats with the intallation:
 
 - Don't use python3.10 because its `pipenv` package doesn't work properly.
