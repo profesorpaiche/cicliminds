@@ -4,6 +4,7 @@ import json
 import ipywidgets as widgets
 
 import cdsapi
+import tarfile
 
 # Defining the class
 class AppCDS:
@@ -13,7 +14,7 @@ class AppCDS:
         self.json_file = cds_list
         self.dictionary = self._get_list() # -> maybe this is the only one needed
         self.model = self.dictionary["model"]
-        self.scenario = self.dictionary["scenario"]
+        self.scenario = self.dictionary["scenario"] # FIXME: Convert . to _
         self.init_params = self.dictionary["init_params"]
         self.frequency_dict = self.dictionary["frequency"]
         self.frequency = list( self.frequency_dict.keys() )
@@ -30,6 +31,10 @@ class AppCDS:
     # React when frequency changes
     def _check_frequency_update(self, change):
         self.widgets["timespan"].options = self.frequency_dict[change.new]
+
+    # Download data when button is clicked
+    def _check_download_click(self, b):
+        self.download_request()
 
     # Create a simple widget
     def _create_simple_widget(self, options):
@@ -52,7 +57,10 @@ class AppCDS:
             widgets_list.append( widgets.VBox(
                                     [widgets.Label(field), widget],
                                     layout = {"flex": "1 1 100px", "width": "auto"}) )
-        app = widgets.HBox(widgets_list)
+        widget_request = widgets.HBox(widgets_list)
+        widget_download = widgets.Button(description = "Request data", icon = "download")
+        widget_download.on_click(self._check_download_click)
+        app = widgets.VBox([widget_request, widget_download])
         return app
 
     # Create the data that is going to be downloaded based on the selection in the filters
@@ -72,4 +80,10 @@ class AppCDS:
     # Download the data
     def download_request(self):
         c = cdsapi.Client()
-        c.retrieve("sis-extreme-indices-cmip6", self.create_data_request(), self.datapath + "download.tar.gz")
+        download_file = self.datapath + "download.tar.gz"
+        c.retrieve("sis-extreme-indices-cmip6", self.create_data_request(), download_file)
+        file = tarfile.open(download_file)
+        file.extract(self.datapath)
+        file.close()
+        os.remove(download_file)
+
