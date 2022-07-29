@@ -10,21 +10,14 @@ class AppCDS:
     def __init__(self, datapath, cds_list):
         self.datapath = datapath
         self.json_file = cds_list
-        self.dictionary = self._get_list() # -> maybe this is the only one needed
-        self.model = self.dictionary["model"]
-        self.scenario = self.dictionary["scenario"] # FIXME: Convert . to _
-        self.init_params = self.dictionary["init_params"]
-        self.frequency_dict = self.dictionary["frequency"]
-        self.frequency = list( self.frequency_dict.keys() )
-        self.timespan = self.frequency_dict[self.frequency[0]]
-        self.variable = self.dictionary["variable"]
+        self.dictionary = self._get_list() # -> FIXME:In "scenario" convert . to _ 
         self.widgets = {}
-        self.widgets["model"] = self._create_simple_widget(options = self.model)
-        self.widgets["scenario"] = self._create_simple_widget(options = self.scenario)
-        self.widgets["init_params"] = self._create_simple_widget(options = self.init_params)
-        self.widgets["frequency"] = self._create_simple_widget(options = self.frequency)
+        self.widgets["model"] = self._create_simple_widget(options = self.dictionary["model"])
+        self.widgets["scenario"] = self._create_simple_widget(options = self.dictionary["scenario"])
+        self.widgets["init_params"] = self._create_simple_widget(options = self.dictionary["init_params"])
+        self.widgets["frequency"] = self._create_simple_widget(options = list( self.dictionary["frequency"].keys() ))
         self.widgets["timespan"] = self._create_simple_widget(options = None)
-        self.widgets["variable"] = self._create_simple_widget(options = self.variable)
+        self.widgets["variable"] = self._create_simple_widget(options = self.dictionary["variable"])
 
     # Getting information from lists
     # ........................................................................ #
@@ -34,7 +27,7 @@ class AppCDS:
         dictionary = json.load(file)
         return dictionary
 
-    # Creating widgets
+    # Creating filter widgets
     # ........................................................................ #
 
     def _create_simple_widget(self, options):
@@ -60,10 +53,10 @@ class AppCDS:
         return app
 
     # React to widgets
-    # ........................................................................ #
+    # ------------------------------------------------------------------------ #
 
     def _check_frequency_update(self, change):
-        self.widgets["timespan"].options = self.frequency_dict[change.new]
+        self.widgets["timespan"].options = self.dictionary["frequency"][change.new]
 
     def _click_download(self, b):
         download_file = self.datapath + "download.tar.gz"
