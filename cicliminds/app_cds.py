@@ -6,9 +6,7 @@ import ipywidgets as widgets
 import cdsapi
 import tarfile
 
-# Defining the class
 class AppCDS:
-    # Constructor
     def __init__(self, datapath, cds_list):
         self.datapath = datapath
         self.json_file = cds_list
@@ -28,28 +26,26 @@ class AppCDS:
         self.widgets["timespan"] = self._create_simple_widget(options = None)
         self.widgets["variable"] = self._create_simple_widget(options = self.variable)
 
-    # React when frequency changes
-    def _check_frequency_update(self, change):
-        self.widgets["timespan"].options = self.frequency_dict[change.new]
+    # Getting information from lists
+    # ........................................................................ #
 
-    # Download data when button is clicked
-    def _check_download_click(self, b):
-        self.download_request()
+    def _get_list(self):
+        file = open(self.json_file)
+        dictionary = json.load(file)
+        return dictionary
 
-    # Create a simple widget
+    # Creating widgets
+    # ........................................................................ #
+
     def _create_simple_widget(self, options):
         simple_widget = widgets.Select(layout = {"width": "auto", "margin": "0 20px 0 0"})
         if options is not None:
             simple_widget.options = options
         return simple_widget
 
-    # Converting the JSON file to python dictionary
-    def _get_list(self):
-        file = open(self.json_file)
-        dictionary = json.load(file)
-        return dictionary
+    # Launch the app.
+    # ======================================================================== #
 
-    # Render the application
     def render(self):
         self.widgets["frequency"].observe(self._check_frequency_update, names = "value")
         widgets_list = []
@@ -59,11 +55,28 @@ class AppCDS:
                                     layout = {"flex": "1 1 100px", "width": "auto"}) )
         widget_request = widgets.HBox(widgets_list)
         widget_download = widgets.Button(description = "Request data", icon = "download")
-        widget_download.on_click(self._check_download_click)
-        app = widgets.VBox([widget_request, widget_download])
+        widget_download.on_click(self._click_download)
+        app = widgets.VBox([widget_request, widget_download], layout = {"flex": "1 1 100px"})
         return app
 
-    # Create the data that is going to be downloaded based on the selection in the filters
+    # React to widgets
+    # ........................................................................ #
+
+    def _check_frequency_update(self, change):
+        self.widgets["timespan"].options = self.frequency_dict[change.new]
+
+    def _click_download(self, b):
+        download_file = self.datapath + "download.tar.gz"
+        c = cdsapi.Client()
+        c.retrieve("sis-extreme-indices-cmip6", self.create_data_request(), download_file)
+        file = tarfile.open(download_file)
+        file.extractall(self.datapath)
+        file.close()
+        os.remove(download_file)
+
+    # Download data
+    # ........................................................................ #
+
     def create_data_request(self):
         data_request = {
             "version": "2_0",
@@ -76,14 +89,3 @@ class AppCDS:
             "temporal_aggregation": self.widgets["frequency"].value,
             "period": self.widgets["timespan"].value}
         return data_request
-
-    # Download the data
-    def download_request(self):
-        c = cdsapi.Client()
-        download_file = self.datapath + "download.tar.gz"
-        c.retrieve("sis-extreme-indices-cmip6", self.create_data_request(), download_file)
-        file = tarfile.open(download_file)
-        file.extract(self.datapath)
-        file.close()
-        os.remove(download_file)
-
