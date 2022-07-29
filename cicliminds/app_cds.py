@@ -6,7 +6,7 @@ import ipywidgets as widgets
 # Defining the class
 class AppCDS:
     # Constructor
-    def __init__(self, cds_list):
+    def __init__(self, cds_list = os.getcwd()+"list/cds_list.json"):
         self.json_file = cds_list
         self.dictionary = self._get_list() # -> maybe this is the only one needed
         self.model = self.dictionary["model"]
