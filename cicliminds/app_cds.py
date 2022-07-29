@@ -3,10 +3,13 @@ import json
 
 import ipywidgets as widgets
 
+import cdsapi
+
 # Defining the class
 class AppCDS:
     # Constructor
-    def __init__(self, cds_list):
+    def __init__(self, datapath, cds_list):
+        self.datapath = datapath
         self.json_file = cds_list
         self.dictionary = self._get_list() # -> maybe this is the only one needed
         self.model = self.dictionary["model"]
@@ -51,3 +54,22 @@ class AppCDS:
                                     layout = {"flex": "1 1 100px", "width": "auto"}) )
         app = widgets.HBox(widgets_list)
         return app
+
+    # Create the data that is going to be downloaded based on the selection in the filters
+    def create_data_request(self):
+        data_request = {
+            "version": "2_0",
+            "format": "tgz",
+            "model": self.widgets["model"].value.lower(),
+            "ensemble_member": self.widgets["init_params"].value,
+            "product_type": "base_period_1981_2010",
+            "variable": self.widgets["variable"].value,
+            "experiment": self.widgets["scenario"].value.lower(),
+            "temporal_aggregation": self.widgets["frequency"].value,
+            "period": self.widgets["timespan"].value}
+        return data_request
+
+    # Download the data
+    def download_request(self):
+        c = cdsapi.Client()
+        c.retrieve("sis-extreme-indices-cmip6", self.create_data_request(), self.datapath + "download.tar.gz")
