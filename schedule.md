@@ -19,16 +19,16 @@ to achieve the objective:
 2. [T2] [O] Review the UI section and get familiar with its workflow.
 3. [T2] [o] Review the `cicliminds` package - Review code.
 4. [T2] [o] Review the `cicliminds` package - Review functionality.
-5. [T2] [.] Review the `cicliminds` package - Review data management.
-6. [T3] [.] Identify the section that needs to be change and its dependencies.
-7. [T3] Get familiar with the section that downloads data.
-8. [T3] Look for documentation on how to access the requested data.
-9. [T3] Design a procedure to access the data.
-10. [T3] Test the access of data independently - Coding.
-11. [T3] Test the access of data independently - Performance.
-12. [T4] Include the procedure in the `cicliminds` package.
-12. [T4] Include the procedure in the `cicliminds` package.
-13. [T5] Test that the access of the data works properly.
-14. [T5] Test if the implementation does not break the original functionality.
-15. [T5] Test correct implementation with the UI.
-16. [T5] Fix errors (depends on the results of the tests).
+5. [T2] [o] Review the `cicliminds` package - Review data management.
+6. [T3] [O] Identify the section that needs to be change and its dependencies.
+7. [T3] [X] Get familiar with the section that downloads data.
+8. [T3] [X] Look for documentation on how to access the requested data.
+9. [T3] [o] Design a procedure to access the data.
+10. [T3] [O] Test the access of data independently - Coding.
+11. [T3] [ ] Test the access of data independently - Performance.
+12. [T4] [ ] Include the procedure in the `cicliminds` package.
+12. [T4] [ ] Include the procedure in the `cicliminds` package.
+13. [T5] [O] Test that the access of the data works properly.
+14. [T5] [.] Test if the implementation does not break the original functionality.
+15. [T5] [.] Test correct implementation with the UI.
+16. [T5] [ ] Fix errors (depends on the results of the tests).
