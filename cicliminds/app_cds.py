@@ -10,7 +10,7 @@ class AppCDS:
     def __init__(self, datapath, cds_list):
         self.datapath = datapath
         self.json_file = cds_list
-        self.dictionary = self._get_list() # -> FIXME:In "scenario" convert . to _ 
+        self.dictionary = self._get_cds_list() # -> FIXME:In "scenario" convert . to _ 
         self.widgets = {}
         self.widgets["model"] = self._create_simple_widget(options = self.dictionary["model"])
         self.widgets["scenario"] = self._create_simple_widget(options = self.dictionary["scenario"])
@@ -22,7 +22,7 @@ class AppCDS:
     # Getting information from lists
     # ........................................................................ #
 
-    def _get_list(self):
+    def _get_cds_list(self):
         file = open(self.json_file)
         dictionary = json.load(file)
         return dictionary
