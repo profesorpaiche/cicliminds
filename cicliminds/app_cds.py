@@ -78,7 +78,7 @@ class AppCDS:
             "ensemble_member": self.widgets["init_params"].value,
             "product_type": "base_period_1981_2010",
             "variable": self.widgets["variable"].value,
-            "experiment": self.widgets["scenario"].value.lower(),
+            "experiment": self.widgets["scenario"].value.lower().replace(".", "-"),
             "temporal_aggregation": self.widgets["frequency"].value,
             "period": self.widgets["timespan"].value}
         return data_request
