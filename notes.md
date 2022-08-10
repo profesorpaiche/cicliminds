@@ -53,13 +53,15 @@ Here are some notes related to the project `cicliminds`.
       Update the `setup.cfg`.
     - [X] Update deprecated functions from `regionmask`.
 
-- [ ] Create the list of variables (For the moment the only idea is hard coding
+- [.] Create the list of variables (For the moment the only idea is hard coding
   it, which is not ideal).
 
-- [ ] Chech the CDS toolbox.
+- [o] Chech the CDS toolbox. -> Doesn't look like an option
 
-- [ ] The app should be able to download data from the CDS or to import it from
+- [O] The app should be able to download data from the CDS or to import it from
   the user.
+
+- [ ] The already defined functions and widgets need to be cleaned.
 
 Some caveats with the intallation:
 
