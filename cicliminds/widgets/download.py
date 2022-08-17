@@ -78,11 +78,11 @@ class DownloadWidget:
 
     def render(self):
         self.download_widgets["model"].options = self.cds_list["model"]
-        self.download_widgets["scenario"].options = self.cds_list["scenario"]
         self.download_widgets["frequency"].options = list(self.cds_list["frequency"].keys())
         self.download_widgets["variable"].options = self.cds_list["variable"]
         self.download_widgets["model"].observe(self._check_model_update, names = "value")
         self.download_widgets["frequency"].observe(self._check_frequency_update, names = "value")
+        self.download_widgets["timespan"].observe(self._check_timespan_update, names = "value")
         filters = []
         for field, widget in self.download_widgets.items():
             filters.append(VBox(
@@ -133,3 +133,10 @@ class DownloadWidget:
     def _check_frequency_update(self, change):
         self.download_widgets["timespan"].options = self.cds_list["frequency"][change.new]
 
+    def _check_timespan_update(self, change):
+        date_int = int(change.new[0])
+        if date_int < 2:
+            # FIXME: Check if it is only historical
+            self.download_widgets["scenario"].options = ["Historical"]
+        else:
+            self.download_widgets["scenario"].options = ["SSP1-2.6", "SSP2-4.5", "SSP5-8.5"]
