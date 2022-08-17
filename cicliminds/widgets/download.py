@@ -9,7 +9,7 @@ import tarfile
 # from cicliminds.widgets.common import ObserverWidget
 
 class DownloadWidget:
-    FILTER_FIELDS = ["model", "scenario", "init_params", "frequency", "timespan", "variable"]
+    FILTER_FIELDS = ["model", "init_params", "frequency", "timespan", "scenario", "variable"]
     DISABLED_FIELDS = []
 
     def __init__(self, datapath, cds_list):
@@ -80,24 +80,31 @@ class DownloadWidget:
         self.download_widgets["model"].options = self.cds_list["model"]
         self.download_widgets["frequency"].options = list(self.cds_list["frequency"].keys())
         self.download_widgets["variable"].options = self.cds_list["variable"]
-        self.download_widgets["model"].observe(self._check_model_update, names = "value")
-        self.download_widgets["frequency"].observe(self._check_frequency_update, names = "value")
-        self.download_widgets["timespan"].observe(self._check_timespan_update, names = "value")
+        self.download_widgets["model"].observe(self._update_init_params, names = "value")
+        self.download_widgets["frequency"].observe(self._update_timespan, names = "value")
+        self.download_widgets["timespan"].observe(self._update_scenario, names = "value")
         filters = []
         for field, widget in self.download_widgets.items():
             filters.append(VBox(
                 [Label(field), widget],
                 layout = {"flex": "1 1 100px", "width": "auto"}))
         download_header = Label("Request data:")
-        download_widgets = HBox(filters)
+        download_widgets_up = HBox(filters[0:2])
+        download_widgets_mid = HBox(filters[2:5])
+        download_widgets_down = HBox(filters[5:6])
         download_button = self.download_button
-        app = VBox([download_header, download_widgets, download_button])
+        app = VBox([
+            download_header,
+            download_widgets_up,
+            download_widgets_mid,
+            download_widgets_down,
+            download_button])
         return app
 
-    # Update widget list
+    # Update widget options
     # ------------------------------------------------------------------------ #
 
-    def _check_model_update(self, change):
+    def _update_init_params(self, change):
         condition_list_1 = [
             "ACCESS_CM2", "ACCESS_ESM1_5", "BCC_CSM2_MR",
             "EC_Earth3_Veg", "FGOALS_g3", "GFDL_CM4",
@@ -130,10 +137,10 @@ class DownloadWidget:
             option_list_2 = ["r" + str(i) + "i1p2f1" for i in range(1,26)]
             self.download_widgets["init_params"].options = option_list_1 + option_list_2
 
-    def _check_frequency_update(self, change):
+    def _update_timespan(self, change):
         self.download_widgets["timespan"].options = self.cds_list["frequency"][change.new]
 
-    def _check_timespan_update(self, change):
+    def _update_scenario(self, change):
         date_int = int(change.new[0])
         if date_int < 2:
             # FIXME: Check if it is only historical
