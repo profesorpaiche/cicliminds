@@ -79,9 +79,9 @@ class DownloadWidget:
     def render(self):
         self.download_widgets["model"].options = self.cds_list["model"]
         self.download_widgets["scenario"].options = self.cds_list["scenario"]
-        self.download_widgets["init_params"].options = self.cds_list["init_params"]
         self.download_widgets["frequency"].options = list(self.cds_list["frequency"].keys())
         self.download_widgets["variable"].options = self.cds_list["variable"]
+        self.download_widgets["model"].observe(self._check_model_update, names = "value")
         self.download_widgets["frequency"].observe(self._check_frequency_update, names = "value")
         filters = []
         for field, widget in self.download_widgets.items():
@@ -96,6 +96,39 @@ class DownloadWidget:
 
     # Update widget list
     # ------------------------------------------------------------------------ #
+
+    def _check_model_update(self, change):
+        condition_list_1 = [
+            "ACCESS_CM2", "ACCESS_ESM1_5", "BCC_CSM2_MR",
+            "EC_Earth3_Veg", "FGOALS_g3", "GFDL_CM4",
+            "GFDL_ESM4", "INM_CM4_8", "INM_CM5_0",
+            "KACE_1_0_G", "KIOST_ESM", "MPI_ESM1_2_HR",
+            "MRI_ESM2_0", "NESM3", "NorESM2_LM", "NorESM2_MM"]
+        condition_list_2 = [
+            "CNRM_CM6_1", "CNRM_CM6_1_HR", "CNRM_ESM2_1",
+            "MIROC_ES2L", "UKESM1_0_LL"]
+        condition_list_3 = ["HadGEM3_GC31_LL", "HadGEM3_GC31_MM"]
+        condition_list_4 = ["EC_Earth3"]
+        condition_list_5 = ["MPI_ESM1_2_LR"]
+        condition_list_6 = ["MIROC6"]
+        condition_list_7 = ["CanESM5"]
+        if change.new in condition_list_1:
+            self.download_widgets["init_params"].options = ["r1i1p1f1"]
+        elif change.new in condition_list_2:
+            self.download_widgets["init_params"].options = ["r1i1p1f2"]
+        elif change.new in condition_list_3:
+            self.download_widgets["init_params"].options = ["r1i1p1f3"]
+        elif change.new in condition_list_4:
+            num = [1, 4, 6, 9, 11, 13, 15]
+            self.download_widgets["init_params"].options = ["r" + str(i) + "i1p1f1" for i in num]
+        elif change.new in condition_list_5:
+            self.download_widgets["init_params"].options = ["r" + str(i) + "i1p1f1" for i in range(1,11)]
+        elif change.new in condition_list_6:
+            self.download_widgets["init_params"].options = ["r" + str(i) + "i1p1f1" for i in range(1,51)]
+        elif change.new in condition_list_7:
+            option_list_1 = ["r" + str(i) + "i1p1f1" for i in range(1,26)]
+            option_list_2 = ["r" + str(i) + "i1p2f1" for i in range(1,26)]
+            self.download_widgets["init_params"].options = option_list_1 + option_list_2
 
     def _check_frequency_update(self, change):
         self.download_widgets["timespan"].options = self.cds_list["frequency"][change.new]
