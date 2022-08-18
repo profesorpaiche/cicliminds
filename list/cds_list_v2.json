@@ -57,6 +57,25 @@
         "r47i1p1f1", "r48i1p1f1", "r49i1p1f1", "r50i1p1f1"
     ],
     "frequency": {
+        "daily": {
+            "timespan": [
+                "19510101-20101230",
+                "19510101-20101231",
+                "19510101-20141230",
+                "19510101-20141231",
+                "20110101-21001230",
+                "20110101-21001231",
+                "20150101-21001230",
+                "20150101-21001231"
+            ],
+            "variable": [
+                "heat_index",
+                "humidex",
+                "universal_thermal_climate_index",
+                "wet_bulb_globe_temperature_index",
+                "wet_bulb_temperature_index"
+            ]
+        },
         "monthly": {
             "timespan": [
                 "184901-201412",
