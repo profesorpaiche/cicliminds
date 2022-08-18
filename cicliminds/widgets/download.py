@@ -60,17 +60,26 @@ class DownloadWidget:
     # Download data
     # ........................................................................ #
 
+    # FIXME: For the moment the daily frequency was removed to simplify the process
     def create_data_request(self):
+        condition_list_1 = [
+            "cold_days", "cold_nights", "cold_spell_duration_index",
+            "extremely_wet_day_precipitation", "warm_days", "warm_nights",
+            "very_wet_day_precipitation", "warm_spell_duration_index"]
+        if self.download_widgets["variable"].value in condition_list_1:
+            base_period = "base_period_1981_2010"
+        else:
+            base_period = "base_independent"
         data_request = {
             "version": "2_0",
             "format": "tgz",
-            "model": self.widgets["model"].value.lower(),
-            "ensemble_member": self.widgets["init_params"].value,
-            "product_type": "base_period_1981_2010",
-            "variable": self.widgets["variable"].value,
-            "experiment": self.widgets["scenario"].value.lower().replace(".", "-"),
-            "temporal_aggregation": self.widgets["frequency"].value,
-            "period": self.widgets["timespan"].value}
+            "model": self.download_widgets["model"].value.lower(),
+            "ensemble_member": self.download_widgets["init_params"].value,
+            "product_type": base_period,
+            "variable": self.download_widgets["variable"].value,
+            "experiment": self.download_widgets["scenario"].value.lower().replace(".", "_"),
+            "temporal_aggregation": self.download_widgets["frequency"].value,
+            "period": self.download_widgets["timespan"].value}
         return data_request
 
     # Launch the widget
@@ -87,7 +96,7 @@ class DownloadWidget:
         for field, widget in self.download_widgets.items():
             filters.append(VBox(
                 [Label(field), widget],
-                layout = {"flex": "1 1 100px", "width": "auto"}))
+                layout = {"width": "33%"}))
         download_header = Label("Request data:")
         download_widgets_up = HBox(filters[0:2])
         download_widgets_mid = HBox(filters[2:5])
@@ -142,7 +151,7 @@ class DownloadWidget:
         if date_int < 2:
             self.download_widgets["scenario"].options = ["Historical"]
         else:
-            self.download_widgets["scenario"].options = ["SSP1-2.6", "SSP2-4.5", "SSP5-8.5"]
+            self.download_widgets["scenario"].options = ["SSP1_2.6", "SSP2_4.5", "SSP5_8.5"]
 
     def _update_timespan(self, change):
         self.download_widgets["timespan"].options = self.cds_list["frequency"][change.new]["timespan"]
