@@ -6,6 +6,7 @@ from ipywidgets import Label, VBox, HBox, Button, SelectMultiple
 
 from cicliminds.widgets.common import ObserverWidget
 from cicliminds_lib.query.datasets import get_shallow_filters_mask
+from cicliminds_lib.query.files import get_datasets
 from cicliminds.interface.query_builder.filter_expander import expand_model_scenarios
 
 
@@ -13,15 +14,17 @@ class FilterWidget(ObserverWidget):
     FILTER_FIELDS = ["model", "scenario", "init_params", "frequency", "timespan", "variable"]
     DISABLED_FIELDS = ["timespan"]
 
-    def __init__(self, datasets):
-        self.datasets = datasets.copy()
+    def __init__(self, datapath):
+        self.datapath = datapath
+        self.datasets = get_datasets(self.datapath)
         self.button_reset = self._get_reset_button()
         self.button_refresh = self._get_refresh_button()
+        self.button_reload = self._get_reload_button()
         self.filter_widgets = self._get_filter_widgets()
         super().__init__()
 
     def render(self):
-        filter_controls = HBox([self.button_reset, self.button_refresh])
+        filter_controls = HBox([self.button_reset, self.button_refresh, self.button_reload])
         filter_widget_panel = self._get_filter_widget_panel()
         filter_widget = VBox([Label("Configuration filter:"),
                               filter_widget_panel,
@@ -83,6 +86,16 @@ class FilterWidget(ObserverWidget):
         button_refresh = Button(description="Refresh filters", button_style="success", icon="redo")
         button_refresh.on_click(self.trigger)
         return button_refresh
+
+    def _get_reload_button(self):
+        button_reload = Button(description="Reaload filter", button_style="info", icon="redo")
+        button_reload.on_click(self._reload_filters)
+        return button_reload
+
+    def _reload_filters(self, change):
+        self.datasets = get_datasets(self.datapath)
+        for field in self.FILTER_FIELDS:
+            self.filter_widgets[field].options = self.datasets[field].unique()
 
     def _get_filter_widgets(self):
         filter_widgets = {}

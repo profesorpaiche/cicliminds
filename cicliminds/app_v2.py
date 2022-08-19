@@ -49,7 +49,8 @@ class App2:  # pylint: disable=too-few-public-methods
         return download_widget
 
     def _get_filter_widget(self):
-        filter_widget = FilterWidget(self.datasets)
+        filter_widget = FilterWidget(self.paths["DATA_DIR"])
+        # filter_widget = FilterWidget(self.datasets)
         filter_widget.observe(self._update_filters_action)
         filter_widget.observe(self._filters_refresh_action)
         return filter_widget
