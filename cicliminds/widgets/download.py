@@ -71,7 +71,7 @@ class DownloadWidget:
         else:
             base_period = "base_independent"
         data_request = {
-            "version": "2_0",
+            "version": "1_0",
             "format": "tgz",
             "model": self.download_widgets["model"].value.lower(),
             "ensemble_member": self.download_widgets["init_params"].value,

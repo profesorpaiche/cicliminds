@@ -7,7 +7,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 from IPython.display import clear_output, display
 from ipywidgets import VBox
 
-from cicliminds.widgets.filter import FilterWidget
+from cicliminds.widgets.filter_old import FilterWidget
 from cicliminds.widgets.filtered import FilteredWidget
 from cicliminds.widgets.staging import StagingWidget
 from cicliminds.widgets.staged import StagedWidget

@@ -72,7 +72,7 @@ class AppCDS:
 
     def create_data_request(self):
         data_request = {
-            "version": "2_0",
+            "version": "1_0",
             "format": "tgz",
             "model": self.widgets["model"].value.lower(),
             "ensemble_member": self.widgets["init_params"].value,
